@@ -1,0 +1,52 @@
+#!/bin/sh
+set -eu
+
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+"$ROOT/bin/build"
+cd "$ROOT/pkgbuild"
+
+if [ "$(id -u)" -eq 0 ] || sudo -n true >/dev/null 2>&1; then
+    makepkg -fsi "$@"
+    systemctl --user daemon-reload
+    systemctl --user enable --now plugwatch-check.timer
+    PLUGIN_SOURCE="/usr/share/plugwatch/bar-widget"
+else
+    echo "No non-interactive system install permission; installing Plugwatch for this user." >&2
+    makepkg -f "$@"
+    LOCAL="$HOME/.local"
+    install -Dm755 "$ROOT/build/plugwatch" "$LOCAL/bin/plugwatch"
+    install -Dm644 plugwatch.svg "$LOCAL/share/icons/hicolor/scalable/apps/plugwatch.svg"
+    install -Dm644 plugwatch.desktop "$LOCAL/share/applications/plugwatch.desktop"
+    sed -i "s|^Exec=plugwatch$|Exec=$LOCAL/bin/plugwatch|" "$LOCAL/share/applications/plugwatch.desktop"
+    install -Dm644 plugwatch-check.service "$HOME/.config/systemd/user/plugwatch-check.service"
+    sed -i "s|^ExecStart=/usr/bin/plugwatch --check$|ExecStart=$LOCAL/bin/plugwatch --check|" \
+        "$HOME/.config/systemd/user/plugwatch-check.service"
+    install -Dm644 plugwatch-check.timer "$HOME/.config/systemd/user/plugwatch-check.timer"
+    systemctl --user daemon-reload
+    systemctl --user enable --now plugwatch-check.timer
+    PLUGIN_SOURCE="$ROOT/bar-widget"
+    echo "Installed Plugwatch in $LOCAL."
+fi
+
+PLUGIN_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/plugwatch.bar-widget"
+if [ -e "$PLUGIN_DIR/.git" ]; then
+    echo "Keeping the existing Git-managed bar widget; update it with omarchy plugin update."
+else
+    install -Dm644 "$PLUGIN_SOURCE/manifest.json" "$PLUGIN_DIR/manifest.json"
+    install -Dm644 "$PLUGIN_SOURCE/v3/BarWidget.qml" "$PLUGIN_DIR/v3/BarWidget.qml"
+    install -Dm644 "$PLUGIN_SOURCE/i18n/en.json" "$PLUGIN_DIR/i18n/en.json"
+    install -Dm644 "$PLUGIN_SOURCE/i18n/da.json" "$PLUGIN_DIR/i18n/da.json"
+fi
+omarchy-shell shell rescanPlugins
+attempt=0
+until omarchy-shell shell listPlugins | grep -q '"id":"plugwatch.bar-widget"'; do
+    attempt=$((attempt + 1))
+    if [ "$attempt" -ge 15 ]; then
+        echo "Omarchy did not discover the Plugwatch bar widget after rescanning." >&2
+        exit 1
+    fi
+    sleep 1
+done
+omarchy plugin enable plugwatch.bar-widget --section right
+systemctl --user start plugwatch-check.service
+echo "Plugwatch is on the right side of the Omarchy bar; set the daily check time in the app or widget."

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "plugwatch.bar-widget",
+  "name": "Plugwatch",
+  "version": "0.1.0",
+  "author": "Plugwatch contributors",
+  "license": "MIT",
+  "description": "New plugins from the Omarchy marketplace in the status bar.",
+  "kinds": ["bar-widget"],
+  "activation": "on-demand",
+  "entryPoints": {
+    "barWidget": "v3/BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Plugwatch",
+    "description": "Show new Omarchy plugins and open them in Plugwatch.",
+    "category": "Info",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

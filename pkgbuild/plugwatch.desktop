@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Plugwatch
+Name[da]=Plugwatch
+Comment=Daily updates from the Omarchy plugin marketplace
+Comment[da]=Daglige opdateringer fra Omarchys pluginmarkedsplads
+Exec=plugwatch
+Icon=plugwatch
+Terminal=false
+Categories=Utility;Network;
+StartupWMClass=plugwatch

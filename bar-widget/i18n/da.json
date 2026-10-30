@@ -1,0 +1,15 @@
+{
+  "widget.title": "Nye plugins",
+  "widget.unseen": {
+    "one": "%1 nyt plugin",
+    "other": "%1 nye plugins"
+  },
+  "widget.openFullApp": "Åbn Plugwatch",
+  "widget.empty": "Ingen nye plugins endnu. Næste daglige tjek er kl. %1.",
+  "widget.moreInApp": "%1 flere i den fulde app",
+  "widget.openAll": "Vis alle nye i Plugwatch",
+  "widget.checkTime": "Dagligt tjek",
+  "widget.saveTime": "Indstil",
+  "widget.savingTime": "Gemmer…",
+  "widget.timeFailed": "Kunne ikke ændre tidspunktet for det daglige tjek."
+}

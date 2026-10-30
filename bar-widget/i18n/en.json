@@ -1,0 +1,15 @@
+{
+  "widget.title": "New plugins",
+  "widget.unseen": {
+    "one": "%1 new plugin",
+    "other": "%1 new plugins"
+  },
+  "widget.openFullApp": "Open Plugwatch",
+  "widget.empty": "No new plugins yet. The next daily check is at %1.",
+  "widget.moreInApp": "%1 more in the full app",
+  "widget.openAll": "Show all new in Plugwatch",
+  "widget.checkTime": "Daily check",
+  "widget.saveTime": "Set",
+  "widget.savingTime": "Saving…",
+  "widget.timeFailed": "Could not update the daily check time."
+}

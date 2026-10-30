@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Omarchy plugin marketplace check
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+Unit=plugwatch-check.service
+
+[Install]
+WantedBy=timers.target

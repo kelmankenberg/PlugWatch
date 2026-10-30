@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "plugwatch.bar-widget",
+  "name": "PlugWatch",
+  "version": "0.1.0",
+  "author": "kelmankenberg and Plugwatch contributors",
+  "license": "MIT",
+  "description": "Discover new Omarchy marketplace plugins with scheduled checks, an unread badge, and a desktop catalog browser.",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "bar-widget/v3/BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "PlugWatch",
+    "description": "Requires the separately installed PlugWatch companion app; see README.",
+    "category": "Info",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

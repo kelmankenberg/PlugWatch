@@ -1,0 +1,38 @@
+name: Build and tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  qt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            build-essential qt6-base-dev qt6-declarative-dev
+      - name: Build application
+        run: bin/build
+      - name: Run offline tests
+        run: bin/test
+      - name: Validate repository manifests
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path(".")
+          for path in (root / "manifest.json", root / "bar-widget/manifest.json"):
+              manifest = json.loads(path.read_text())
+              assert manifest["schemaVersion"] == 1
+              for entry in manifest["entryPoints"].values():
+                  assert not Path(entry).is_absolute() and ".." not in entry
+                  assert (path.parent / entry).is_file()
+          for path in root.glob("**/i18n/*.json"):
+              json.loads(path.read_text())
+          PY

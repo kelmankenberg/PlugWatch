@@ -1,0 +1,8 @@
+[Unit]
+Description=Check the Omarchy plugin marketplace with Plugwatch
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/plugwatch --check
