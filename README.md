@@ -2,6 +2,8 @@
 
 Check the [Omarchy Plugin Marketplace](https://plugins.omarchy.org/) for new community plugins, browse by official category, and search names, summaries, authors, or tags.
 
+![PlugWatch browsing marketplace plugins and listing details](preview.png)
+
 Plugwatch stores a catalog snapshot locally. A daily systemd user timer checks for new listings and keeps discoveries marked until you mark them seen. Set the morning check time in the app or bar widget using 24-hour `HH:MM`; both controls update the same timer. The first successful check establishes a baseline; later checks highlight added listings. Refresh at any time with **Space** or **Ctrl+R**.
 
 | Key | Action |
