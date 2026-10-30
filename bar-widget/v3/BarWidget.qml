@@ -78,7 +78,7 @@ BarWidget {
     if (!root.bar) return
     let command = "plugwatch"
     if (newOnly) command += " --new"
-    if (pluginId) command += " --plugin " + Util.shellQuote(pluginId)
+    if (pluginId) command += " --listing " + Util.shellQuote(pluginId)
     popupOpen = false
     root.bar.run(command)
   }

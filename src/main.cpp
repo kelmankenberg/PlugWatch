@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.addHelpOption();
     const QCommandLineOption pluginOption(
-        QStringLiteral("plugin"),
+        QStringLiteral("listing"),
         QStringLiteral("Select a plugin by marketplace ID when opening the full app."),
         QStringLiteral("id"));
     parser.addOption(pluginOption);
