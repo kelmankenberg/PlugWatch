@@ -350,8 +350,8 @@ ApplicationWindow {
                         }
                         Label {
                             text: win.selectedPlugin
-                                  ? qsTr("%1 · by %2").arg(win.selectedPlugin.category,
-                                                           win.selectedPlugin.author)
+                                  ? qsTr("%1 · by %2").arg(win.selectedPlugin.category)
+                                                      .arg(win.selectedPlugin.author)
                                   : ""
                             textFormat: Text.PlainText
                             color: "#a6a8ad"
