@@ -10,6 +10,7 @@ if [ "$(id -u)" -eq 0 ] || sudo -n true >/dev/null 2>&1; then
     systemctl --user daemon-reload
     systemctl --user enable --now plugwatch-check.timer
     PLUGIN_SOURCE="/usr/share/plugwatch/bar-widget"
+    PLUGIN_MANIFEST="$PLUGIN_SOURCE/manifest.json"
 else
     echo "No non-interactive system install permission; installing Plugwatch for this user." >&2
     makepkg -f "$@"
@@ -25,6 +26,7 @@ else
     systemctl --user daemon-reload
     systemctl --user enable --now plugwatch-check.timer
     PLUGIN_SOURCE="$ROOT/bar-widget"
+    PLUGIN_MANIFEST="$PLUGIN_SOURCE/plugin-manifest.json"
     echo "Installed Plugwatch in $LOCAL."
 fi
 
@@ -32,7 +34,7 @@ PLUGIN_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/plugwatch.bar-widg
 if [ -e "$PLUGIN_DIR/.git" ]; then
     echo "Keeping the existing Git-managed bar widget; update it with omarchy plugin update."
 else
-    install -Dm644 "$PLUGIN_SOURCE/manifest.json" "$PLUGIN_DIR/manifest.json"
+    install -Dm644 "$PLUGIN_MANIFEST" "$PLUGIN_DIR/manifest.json"
     install -Dm644 "$PLUGIN_SOURCE/v3/BarWidget.qml" "$PLUGIN_DIR/v3/BarWidget.qml"
     install -Dm644 "$PLUGIN_SOURCE/i18n/en.json" "$PLUGIN_DIR/i18n/en.json"
     install -Dm644 "$PLUGIN_SOURCE/i18n/da.json" "$PLUGIN_DIR/i18n/da.json"

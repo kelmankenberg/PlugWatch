@@ -20,7 +20,7 @@ package() {
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 "$startdir/plugwatch.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/plugwatch.svg"
   install -Dm644 "$startdir/plugwatch.desktop" "$pkgdir/usr/share/applications/plugwatch.desktop"
-  install -Dm644 "$startdir/../bar-widget/manifest.json" "$pkgdir/usr/share/plugwatch/bar-widget/manifest.json"
+  install -Dm644 "$startdir/../bar-widget/plugin-manifest.json" "$pkgdir/usr/share/plugwatch/bar-widget/manifest.json"
   install -Dm644 "$startdir/../bar-widget/v3/BarWidget.qml" "$pkgdir/usr/share/plugwatch/bar-widget/v3/BarWidget.qml"
   install -Dm644 "$startdir/../bar-widget/i18n/en.json" "$pkgdir/usr/share/plugwatch/bar-widget/i18n/en.json"
   install -Dm644 "$startdir/../bar-widget/i18n/da.json" "$pkgdir/usr/share/plugwatch/bar-widget/i18n/da.json"

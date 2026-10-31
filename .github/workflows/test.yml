@@ -27,7 +27,7 @@ jobs:
           import json
           from pathlib import Path
           root = Path(".")
-          for path in (root / "manifest.json", root / "bar-widget/manifest.json"):
+          for path in (root / "manifest.json", root / "bar-widget/plugin-manifest.json"):
               manifest = json.loads(path.read_text())
               assert manifest["schemaVersion"] == 1
               for entry in manifest["entryPoints"].values():
