@@ -8,3 +8,5 @@ cd "$ROOT/build/tests"
 qmake6 "$ROOT/tests/plugwatch_tests.pro"
 make -j"$(nproc)"
 QT_QPA_PLATFORM=offscreen ./plugwatch_tests
+QT_QPA_PLATFORM=offscreen "$(qmake6 -query QT_INSTALL_BINS)/qmltestrunner" \
+    -input "$ROOT/tests/tst_catalog_text.qml"

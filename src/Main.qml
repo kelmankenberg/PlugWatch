@@ -265,12 +265,14 @@ ApplicationWindow {
                                     Label {
                                         Layout.fillWidth: true
                                         text: pluginRow.modelData.name
+                                        textFormat: Text.PlainText
                                         elide: Text.ElideRight
                                         font.weight: Font.DemiBold
                                     }
                                     Label {
                                         Layout.fillWidth: true
                                         text: pluginRow.modelData.category
+                                        textFormat: Text.PlainText
                                         color: "#a6a8ad"
                                         font.pixelSize: 12
                                         elide: Text.ElideRight
@@ -321,6 +323,7 @@ ApplicationWindow {
                         text: backend.error.length > 0
                               ? qsTr("Could not load the marketplace catalog.\n%1").arg(backend.error)
                               : qsTr("Select a plugin to see its summary and installation details.")
+                        textFormat: Text.PlainText
                         color: "#a6a8ad"
                     }
                     ColumnLayout {
@@ -332,6 +335,7 @@ ApplicationWindow {
                             Label {
                                 Layout.fillWidth: true
                                 text: win.selectedPlugin ? win.selectedPlugin.name : ""
+                                textFormat: Text.PlainText
                                 font.pixelSize: 27
                                 font.weight: Font.DemiBold
                                 wrapMode: Text.Wrap
@@ -349,6 +353,7 @@ ApplicationWindow {
                                   ? qsTr("%1 · by %2").arg(win.selectedPlugin.category,
                                                            win.selectedPlugin.author)
                                   : ""
+                            textFormat: Text.PlainText
                             color: "#a6a8ad"
                         }
                         RowLayout {
@@ -374,6 +379,7 @@ ApplicationWindow {
                             Label {
                                 Layout.fillWidth: true
                                 text: win.selectedPlugin ? win.selectedPlugin.description : ""
+                                textFormat: Text.PlainText
                                 wrapMode: Text.Wrap
                                 font.pixelSize: 15
                                 lineHeight: 1.25
@@ -385,6 +391,7 @@ ApplicationWindow {
                             text: win.selectedPlugin
                                   ? qsTr("Tags: %1").arg(win.selectedPlugin.tags.join(", "))
                                   : ""
+                            textFormat: Text.PlainText
                             color: "#a6a8ad"
                             wrapMode: Text.Wrap
                         }
@@ -424,6 +431,7 @@ ApplicationWindow {
                             Layout.fillWidth: true
                             visible: win.selectedPlugin && win.selectedPlugin.installCommand.length === 0
                             text: win.selectedPlugin ? win.selectedPlugin.installNote : ""
+                            textFormat: Text.PlainText
                             wrapMode: Text.Wrap
                             color: "#d4d5d8"
                         }
@@ -491,6 +499,7 @@ ApplicationWindow {
                                         new Date(backend.lastChecked).toLocaleString(Qt.locale().name))
                                   : qsTr("The catalog is checked automatically each day at %1.")
                                         .arg(backend.checkTime)
+                        textFormat: Text.PlainText
                         color: backend.error.length > 0 ? "#ff8a80" : "#a6a8ad"
                         wrapMode: Text.Wrap
                         font.pixelSize: 12
